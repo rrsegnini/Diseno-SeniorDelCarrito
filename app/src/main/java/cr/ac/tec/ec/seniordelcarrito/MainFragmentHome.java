@@ -132,9 +132,10 @@ public class MainFragmentHome extends Fragment {
         new Images.DownloadImageTask(new_item)
                 .execute(p.getImageURL());
 
-        /*Changing CardView settings*/
+        /*Changing ImageView settings*/
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(200, 200);
         new_item.setLayoutParams(layoutParams);
+        //new_item.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
         /*Changing CardView settings*/
         new_item_card.setRadius((float)18);
