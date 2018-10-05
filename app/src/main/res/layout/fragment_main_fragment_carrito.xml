@@ -1,14 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainFragmentCarrito">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/title_carrito" />
+        android:orientation="vertical"
+        android:paddingRight="@dimen/activity_horizontal_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/carrito_txtTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableLeft="@mipmap/carrito"
+                android:gravity="center"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:text="CARRITO"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/carrito_txtTotal"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="Total:"
+                android:textSize="30sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="true"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Switch
+                    android:id="@+id/carrito_swtDelivery"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:text="Need delivery?"
+                    android:textSize="30sp" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/carrito_txlAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/activity_horizontal_margin">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/carrito_txtAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Specify building, office or classroom"
+                        android:textSize="18sp" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/activity_horizontal_margin">
+
+            <ListView
+                android:id="@+id/carrito_lstOrderLines"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </ScrollView>
+
+    </LinearLayout>
 
 </FrameLayout>

@@ -3,10 +3,17 @@ package cr.ac.tec.ec.seniordelcarrito;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+import android.widget.Toast;
 
 
 /**
@@ -58,6 +65,40 @@ public class MainFragmentCarrito extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+
+    }
+
+    private void setDeliverySwitch(){
+        Switch delivery = getView().findViewById(R.id.carrito_swtDelivery);
+        final TextInputLayout address = getView().findViewById(R.id.carrito_txlAddress);
+        delivery.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    address.setFocusable(true);
+                    address.setEnabled(true);
+                    address.setHint("Specify address, office or classroom");
+
+                } else {
+                    address.setEnabled(false);
+                    address.setFocusable(false);
+                    address.setHint("I'll pick it up myself");
+                }
+            }
+        });
+
+    }
+
+    private void disableAddressInput(){
+        final TextInputLayout address = getView().findViewById(R.id.carrito_txlAddress);
+        address.setHint("I'll pick it up myself");
+        address.setFocusable(false);
+        address.setEnabled(false);
+        //address.setInputType(InputType.TYPE_NULL);
+
+
     }
 
     @Override
@@ -65,6 +106,12 @@ public class MainFragmentCarrito extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main_fragment_carrito, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
+        disableAddressInput();
+        setDeliverySwitch();
     }
 
     // TODO: Rename method, update argument and hook method into UI event

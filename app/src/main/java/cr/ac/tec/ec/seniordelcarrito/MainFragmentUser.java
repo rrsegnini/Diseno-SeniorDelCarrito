@@ -3,10 +3,15 @@ package cr.ac.tec.ec.seniordelcarrito;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+import android.widget.Toast;
 
 
 /**
@@ -58,7 +63,14 @@ public class MainFragmentUser extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+
+
+
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -104,5 +116,7 @@ public class MainFragmentUser extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+
+
     }
 }

@@ -5,6 +5,9 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_carrito">Carrito</string>
     <string name="title_user">User</string>
+    <string name="main_pastry">Pastry</string>
+    <string name="main_candy">Candy</string>
+    <string name="main_beverages">Beverages</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

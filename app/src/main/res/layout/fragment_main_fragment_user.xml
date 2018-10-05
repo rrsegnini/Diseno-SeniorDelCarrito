@@ -1,14 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/img_logo_background"
     tools:context=".MainFragmentUser">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/title_user" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/user_lytOptions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/user_lytOrders"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/user_imgOrders"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@color/img_logo_background"
+                    android:paddingLeft="@android:dimen/app_icon_size"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/colon" />
+
+                <Button
+                    android:id="@+id/user_btnOrders"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/img_logo_background"
+                    android:text="Orders"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/user_lytHelp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/user_imgOrders"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@color/img_logo_background"
+                    android:cropToPadding="false"
+                    android:paddingLeft="@android:dimen/app_icon_size"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/lifesaver" />
+
+                <Button
+                    android:id="@+id/user_btnOrders"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/img_logo_background"
+                    android:text="Help"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/user_lytSettings"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/user_imgOrders"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@color/img_logo_background"
+                    android:paddingLeft="@android:dimen/app_icon_size"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/settings" />
+
+                <Button
+                    android:id="@+id/user_btnOrders"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/img_logo_background"
+                    android:text="Settings"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/user_lytLogout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/user_imgOrders"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@color/img_logo_background"
+                    android:paddingLeft="@android:dimen/app_icon_size"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/logout" />
+
+                <Button
+                    android:id="@+id/user_btnOrders"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/img_logo_background"
+                    android:text="Log out"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>
