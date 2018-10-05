@@ -76,8 +76,32 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void loadData(){
-        Toast.makeText(MainActivity.this,"Test del loadData", Toast.LENGTH_SHORT).show();
-        Inventory.addItem(new Product("Pan de canela", 600, "https://image.ibb.co/bW7O9K/cinnamorolls.jpg", ProductType.PASTRY));
+        Inventory.addItem(new Product("Pan de canela", 600,
+                "https://image.ibb.co/bW7O9K/cinnamorolls.jpg", ProductType.PASTRY));
+        Inventory.addItem(new Product("Flauta de pollo", 650,
+                "https://image.ibb.co/bW7O9K/cinnamorolls.jpg", ProductType.PASTRY));
+        Inventory.addItem(new Product("Enchilada de papa", 650,
+                "https://image.ibb.co/bW7O9K/cinnamorolls.jpg", ProductType.PASTRY));
+        Inventory.addItem(new Product("Mini pizza", 800,
+                "https://image.ibb.co/bW7O9K/cinnamorolls.jpg", ProductType.PASTRY));
+
+        Inventory.addItem(new Product("Chiclets", 250,
+                "https://image.ibb.co/bW7O9K/cinnamorolls.jpg", ProductType.CANDY));
+        Inventory.addItem(new Product("Gomita Trululu Feroz", 400,
+                "https://image.ibb.co/bW7O9K/cinnamorolls.jpg", ProductType.CANDY));
+        Inventory.addItem(new Product("Bubulubu", 300,
+                "https://image.ibb.co/bW7O9K/cinnamorolls.jpg", ProductType.CANDY));
+        Inventory.addItem(new Product("Snickers", 800,
+                "https://image.ibb.co/bW7O9K/cinnamorolls.jpg", ProductType.CANDY));
+
+        Inventory.addItem(new Product("Hi-C Uva", 600,
+                "https://image.ibb.co/bW7O9K/cinnamorolls.jpg", ProductType.BEVERAGE));
+        Inventory.addItem(new Product("Hi-C Te Frio", 650,
+                "https://image.ibb.co/bW7O9K/cinnamorolls.jpg", ProductType.BEVERAGE));
+        Inventory.addItem(new Product("Fresco Leche Chocolate", 650,
+                "https://image.ibb.co/bW7O9K/cinnamorolls.jpg", ProductType.BEVERAGE));
+        Inventory.addItem(new Product("Fresco Leche Vainilla", 800,
+                "https://image.ibb.co/bW7O9K/cinnamorolls.jpg", ProductType.BEVERAGE));
 
     }
 

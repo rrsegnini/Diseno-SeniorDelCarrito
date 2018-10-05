@@ -1,13 +1,18 @@
 package cr.ac.tec.ec.seniordelcarrito;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.CardView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,21 +103,61 @@ public class MainFragmentHome extends Fragment {
 
 
         LinearLayout pastry = getView().findViewById(R.id.main_lytPastry);
+        LinearLayout candy = getView().findViewById(R.id.main_lytCandy);
+        LinearLayout beverages = getView().findViewById(R.id.main_lytBeverages);
 
         for (Product p:Inventory.getInventario()
              ) {
             if (p.getType() == ProductType.PASTRY){
-                ImageView new_item = new ImageView(getContext());
-
-                new Images.DownloadImageTask((ImageView) getView().findViewById(R.id.main_imgTest))
-                        .execute(p.getImageURL());
-                ///pastry.addView(new_item);
-
-                //new_item.setBackground();
+                setProduct(p, pastry);
+            }else if (p.getType() == ProductType.CANDY){
+                setProduct(p, candy);
+            }else if (p.getType() == ProductType.BEVERAGE){
+                setProduct(p, beverages);
             }
 
         }
 
+    }
+
+    /*Add the product to its respective ScrollView in the Home fragment*/
+    private void setProduct(Product p, LinearLayout product_layout){
+        CardView new_item_card = new CardView(getContext());
+        ImageView new_item = new ImageView(getContext());
+        TextView product_info = new TextView(getContext());
+        product_info.setBackgroundColor(Color.parseColor("#ffffff"));
+        product_info.setText("   " + p.getName() + "\n   " + p.getPrice());
+        product_info.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
+        /*Downloads the image from the URL and displays it on the ImageView*/
+        new Images.DownloadImageTask(new_item)
+                .execute(p.getImageURL());
+
+        /*Changing CardView settings*/
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(200, 200);
+        new_item.setLayoutParams(layoutParams);
+
+        /*Changing CardView settings*/
+        new_item_card.setRadius((float)18);
+
+        new_item_card.setPadding(100,100,100,100);
+        final int version = Build.VERSION.SDK_INT;
+        if (version >= 21) {
+            new_item_card.setElevation((float)0);
+        } else {
+            /*Does nothing*/
+        }
+
+        /*Changing LinearLayout settings*/
+
+
+
+
+        LinearLayout.LayoutParams layoutParamsText = new LinearLayout.LayoutParams(200, 50);
+        product_info.setLayoutParams(layoutParamsText);
+
+        new_item_card.addView(new_item);
+        new_item_card.addView(product_info);
+        product_layout.addView(new_item_card);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
