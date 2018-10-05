@@ -19,6 +19,9 @@ import android.view.ViewGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import cr.ac.tec.ec.seniordelcarrito.model.Product;
+import cr.ac.tec.ec.seniordelcarrito.model.ProductType;
+
 public class MainActivity extends AppCompatActivity
         implements MainFragmentCarrito.OnFragmentInteractionListener,
         MainFragmentHome.OnFragmentInteractionListener,
@@ -67,7 +70,14 @@ public class MainActivity extends AppCompatActivity
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        loadData();
+    }
 
+    private void loadData(){
+        new Product("Pan de canela", 600, "https://www.google.com/url?sa=i&rct" +
+                "=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwj89NTF_u7dAhXimuAKHXYzAOUQ" +
+                "jRx6BAgBEAU&url=http%3A%2F%2Femplatandomadrid.com%2Freceta-de-cinnamon-rolls%2F&psi" +
+                "g=AOvVaw1GxGFarexXYLSPxu2m5DFH&ust=1538818151811185", ProductType.PASTRY);
     }
 
     @Override
