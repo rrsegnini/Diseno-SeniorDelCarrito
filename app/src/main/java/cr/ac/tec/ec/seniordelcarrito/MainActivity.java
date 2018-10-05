@@ -18,7 +18,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import cr.ac.tec.ec.seniordelcarrito.model.Inventory;
 import cr.ac.tec.ec.seniordelcarrito.model.Product;
 import cr.ac.tec.ec.seniordelcarrito.model.ProductType;
 
@@ -74,10 +76,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void loadData(){
-        new Product("Pan de canela", 600, "https://www.google.com/url?sa=i&rct" +
-                "=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwj89NTF_u7dAhXimuAKHXYzAOUQ" +
-                "jRx6BAgBEAU&url=http%3A%2F%2Femplatandomadrid.com%2Freceta-de-cinnamon-rolls%2F&psi" +
-                "g=AOvVaw1GxGFarexXYLSPxu2m5DFH&ust=1538818151811185", ProductType.PASTRY);
+        Toast.makeText(MainActivity.this,"Test del loadData", Toast.LENGTH_SHORT).show();
+        Inventory.addItem(new Product("Pan de canela", 600, "https://image.ibb.co/bW7O9K/cinnamorolls.jpg", ProductType.PASTRY));
+
     }
 
     @Override

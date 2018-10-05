@@ -1,6 +1,7 @@
 package cr.ac.tec.ec.seniordelcarrito;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,7 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import cr.ac.tec.ec.seniordelcarrito.model.Inventory;
+import cr.ac.tec.ec.seniordelcarrito.model.Product;
+import cr.ac.tec.ec.seniordelcarrito.model.ProductType;
 import cr.ac.tec.ec.seniordelcarrito.utility.Images;
 
 
@@ -88,6 +95,23 @@ public class MainFragmentHome extends Fragment {
     }
 
     private void populateHome(){
+
+
+        LinearLayout pastry = getView().findViewById(R.id.main_lytPastry);
+
+        for (Product p:Inventory.getInventario()
+             ) {
+            if (p.getType() == ProductType.PASTRY){
+                ImageView new_item = new ImageView(getContext());
+
+                new Images.DownloadImageTask((ImageView) getView().findViewById(R.id.main_imgTest))
+                        .execute(p.getImageURL());
+                ///pastry.addView(new_item);
+
+                //new_item.setBackground();
+            }
+
+        }
 
     }
 

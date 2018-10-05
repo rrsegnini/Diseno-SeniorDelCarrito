@@ -5,12 +5,14 @@ public class Product {
     private int price;
     private String imageURL;
     private ProductType type;
+    private int quantity;
 
     public Product(String name, int price, String imageURL, ProductType type) {
         this.name = name;
         this.price = price;
         this.imageURL = imageURL;
         this.type = type;
+        this.quantity = quantity;
     }
 
     public String getName() {
