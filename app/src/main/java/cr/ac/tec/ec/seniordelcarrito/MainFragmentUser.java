@@ -9,16 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link main_fmtHome.OnFragmentInteractionListener} interface
+ * {@link MainFragmentUser.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link main_fmtHome#newInstance} factory method to
+ * Use the {@link MainFragmentUser#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class main_fmtHome extends Fragment {
+public class MainFragmentUser extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +29,7 @@ public class main_fmtHome extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public main_fmtHome() {
+    public MainFragmentUser() {
         // Required empty public constructor
     }
 
@@ -40,11 +39,11 @@ public class main_fmtHome extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment main_fmtHome.
+     * @return A new instance of fragment MainFragmentUser.
      */
     // TODO: Rename and change types and number of parameters
-    public static main_fmtHome newInstance(String param1, String param2) {
-        main_fmtHome fragment = new main_fmtHome();
+    public static MainFragmentUser newInstance(String param1, String param2) {
+        MainFragmentUser fragment = new MainFragmentUser();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,7 +64,7 @@ public class main_fmtHome extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main_fmt_home, container, false);
+        return inflater.inflate(R.layout.fragment_main_fragment_user, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
