@@ -13,5 +13,15 @@ public class Inventory {
         return inventario;
     }
 
+    public static Product getProduct(int id){
+        for (Product p:inventario
+             ) {
+            if (p.getIdProduct() == id){
+                return p;
+            }
+        }
+        return null;
+    }
+
 
 }

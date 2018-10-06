@@ -11,9 +11,19 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.ListView;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import cr.ac.tec.ec.seniordelcarrito.model.Carrito;
+import cr.ac.tec.ec.seniordelcarrito.model.CarritoItem;
+import cr.ac.tec.ec.seniordelcarrito.model.Product;
 
 
 /**
@@ -112,6 +122,25 @@ public class MainFragmentCarrito extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
         disableAddressInput();
         setDeliverySwitch();
+        List<CarritoItem> addedItems = Carrito.getAddedItems();
+        ListView carritoList = getView().findViewById(R.id.carrito_lstOrderLines);
+        TextView line = new TextView(getContext());
+        Product p;
+        int qty = 0;
+        ArrayList<String> itemsList = new ArrayList<>();
+        for (CarritoItem c:addedItems
+             ) {
+            p = c.getProduct();
+            qty = c.getQuantity();
+            itemsList.add(p.getName() + " " + String.valueOf(p.getQuantity()) + " " + String.valueOf(p.getPrice()*qty));
+        }
+        ArrayAdapter<String> arrayAdapter =
+                new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, itemsList);
+        // Set The Adapter
+        carritoList.setAdapter(arrayAdapter);
+
+
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

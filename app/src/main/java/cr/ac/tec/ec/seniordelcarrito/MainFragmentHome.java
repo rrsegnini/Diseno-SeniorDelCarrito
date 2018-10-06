@@ -195,6 +195,7 @@ public class MainFragmentHome extends Fragment{
         args.putInt("Price", p.getPrice());
         args.putInt("ProductQty", p.getQuantity());
         args.putString("Name", p.getName());
+        args.putSerializable("Product", p);
 
 
         sf.setArguments(args);

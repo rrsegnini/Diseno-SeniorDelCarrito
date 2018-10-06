@@ -1,16 +1,13 @@
 package cr.ac.tec.ec.seniordelcarrito;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
-import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,7 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.view.Menu;
+
+import cr.ac.tec.ec.seniordelcarrito.model.CarritoBuilder;
+import cr.ac.tec.ec.seniordelcarrito.model.Product;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,12 +33,15 @@ public class MainFragmentSelection extends DialogFragment {
     private static final String ARG_PARAM1 = "Price";
     private static final String ARG_PARAM2 = "ProductQty";
     private static final String ARG_PARAM3 = "Name";
-
+    private static final String ARG_PARAM4 = "Product";
 
     // TODO: Rename and change types of parameters
     private int Price;
     private int Qty;
     private String Name;
+    private Product _Product;
+
+    private CarritoBuilder carritobuilder = new CarritoBuilder();
 
     private OnFragmentInteractionListener mListener;
 
@@ -72,6 +74,7 @@ public class MainFragmentSelection extends DialogFragment {
             Price = getArguments().getInt(ARG_PARAM1);
             Qty = getArguments().getInt(ARG_PARAM2);
             Name = getArguments().getString(ARG_PARAM3);
+            _Product = (Product) getArguments().getSerializable(ARG_PARAM4);
         }
     }
 
@@ -83,7 +86,7 @@ public class MainFragmentSelection extends DialogFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         LinearLayout info = getView().findViewById(R.id.main_lytSelection);
@@ -118,13 +121,15 @@ public class MainFragmentSelection extends DialogFragment {
             //@SuppressLint("RestrictedApi")
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Test", Toast.LENGTH_SHORT).show();
-
                 BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
 
                 bottomNavigationView.getMenu().findItem(R.id.navigation_carrito).setTitle("Carrito(" + String.valueOf(np.getValue()) +")");
                 bottomNavigationView.getMenu().findItem(R.id.navigation_carrito).setIcon(R.mipmap.baseline_shopping_cart_black_48dp);
-                //bottomNavigationView.getMenu().findItem(bottomNavigationView.getSelectedItemId());
+
+
+                carritobuilder.buildOrder(_Product, np.getValue());
+
+                getDialog().dismiss();
 
 
             }

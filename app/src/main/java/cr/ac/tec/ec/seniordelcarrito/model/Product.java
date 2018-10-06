@@ -1,6 +1,8 @@
 package cr.ac.tec.ec.seniordelcarrito.model;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     private int idProduct;
     private String name;
     private int price;
