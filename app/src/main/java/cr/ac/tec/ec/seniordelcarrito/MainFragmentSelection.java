@@ -1,19 +1,24 @@
 package cr.ac.tec.ec.seniordelcarrito;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.view.Menu;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -106,15 +111,31 @@ public class MainFragmentSelection extends DialogFragment {
         });
 
         info.addView(np, 3);
-
-
         NameTxt.setText(Name);
 
+        Button add2Carrito = getView().findViewById(R.id.main_btnAdd);
+        add2Carrito.setOnClickListener(new View.OnClickListener() {
+            //@SuppressLint("RestrictedApi")
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Test", Toast.LENGTH_SHORT).show();
+
+                BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
+
+                bottomNavigationView.getMenu().findItem(R.id.navigation_carrito).setTitle("Carrito(" + String.valueOf(np.getValue()) +")");
+                bottomNavigationView.getMenu().findItem(R.id.navigation_carrito).setIcon(R.mipmap.baseline_shopping_cart_black_48dp);
+                //bottomNavigationView.getMenu().findItem(bottomNavigationView.getSelectedItemId());
+
+
+            }
+        });
 
 
 
 
     }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

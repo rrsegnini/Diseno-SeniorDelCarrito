@@ -1,8 +1,11 @@
 package cr.ac.tec.ec.seniordelcarrito;
 
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RestrictTo;
+import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
@@ -13,6 +16,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +36,8 @@ public class MainActivity extends AppCompatActivity
         MainFragmentSelection.OnFragmentInteractionListener{
 
     private TextView mTextMessage;
+    public static Menu BottomMenu;
+    private Menu mMenu;
 
     private void fragmentChanger(FragmentManager fm, Fragment fragment){
         fm.beginTransaction()
@@ -39,11 +46,10 @@ public class MainActivity extends AppCompatActivity
                 .commit();
     }
 
+
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-
-
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment;
@@ -62,6 +68,7 @@ public class MainActivity extends AppCompatActivity
                     fragmentChanger(fm, fragment);
                     return true;
             }
+
             return false;
         }
     };
