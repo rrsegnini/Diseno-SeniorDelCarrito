@@ -1,6 +1,9 @@
 package cr.ac.tec.ec.seniordelcarrito;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -8,17 +11,22 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +44,7 @@ import cr.ac.tec.ec.seniordelcarrito.utility.Images;
  * Use the {@link MainFragmentHome#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MainFragmentHome extends Fragment {
+public class MainFragmentHome extends Fragment{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -121,7 +129,7 @@ public class MainFragmentHome extends Fragment {
     }
 
     /*Add the product to its respective ScrollView in the Home fragment*/
-    private void setProduct(Product p, LinearLayout product_layout){
+    private void setProduct(final Product p, LinearLayout product_layout){
         CardView new_item_card = new CardView(getContext());
         ImageView new_item = new ImageView(getContext());
         TextView product_info = new TextView(getContext());
@@ -139,6 +147,13 @@ public class MainFragmentHome extends Fragment {
 
         /*Changing CardView settings*/
         new_item_card.setRadius((float)18);
+        new_item_card.setTag(p.getIdProduct());
+        new_item_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                productSelection(p, v);
+            }
+        });
 
         new_item_card.setPadding(100,100,100,100);
         final int version = Build.VERSION.SDK_INT;
@@ -159,6 +174,82 @@ public class MainFragmentHome extends Fragment {
         new_item_card.addView(new_item);
         new_item_card.addView(product_info);
         product_layout.addView(new_item_card);
+    }
+
+
+
+
+    private void productSelection(final Product p, View v){
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+
+        MainFragmentSelection sf = new MainFragmentSelection();
+
+
+
+        Bundle args = new Bundle();
+        args.putInt("Price", p.getPrice());
+        args.putInt("ProductQty", p.getQuantity());
+        args.putString("Name", p.getName());
+
+
+        sf.setArguments(args);
+
+
+        DialogFragment dialogFragment = sf;
+        dialogFragment.show(ft, "Selection");
+        /*final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        builder.setMessage("Quantity")
+                .setTitle(p.getName());
+
+
+        final NumberPicker np = new NumberPicker(getContext());
+        np.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+        np.setMinValue(1);
+        np.setMaxValue(p.getQuantity());
+        np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+
+                builder.setMessage("Quantity: " + np.getValue() + "\n"
+                + "Total: " + p.getPrice()*np.getValue());
+                builder.create();
+                AlertDialog dialog = builder.create();
+
+                dialog.show();
+
+            }
+        });
+
+
+
+        //info.addView(np);
+        //info.addView(total_price);
+        builder.setView(np);
+
+
+
+        builder.setPositiveButton("Add to carrito", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked OK button
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+
+
+        AlertDialog dialog = builder.create();
+
+        dialog.show();*/
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

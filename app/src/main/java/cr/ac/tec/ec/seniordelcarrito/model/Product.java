@@ -1,17 +1,35 @@
 package cr.ac.tec.ec.seniordelcarrito.model;
 
 public class Product {
+    private int idProduct;
     private String name;
     private int price;
     private String imageURL;
     private ProductType type;
     private int quantity;
 
-    public Product(String name, int price, String imageURL, ProductType type) {
+    public Product(int idProduct, String name, int price, String imageURL, ProductType type, int quantity) {
+        this.idProduct = idProduct;
         this.name = name;
         this.price = price;
         this.imageURL = imageURL;
         this.type = type;
+        this.quantity = quantity;
+    }
+
+    public int getIdProduct() {
+        return idProduct;
+    }
+
+    public void setIdProduct(int idProduct) {
+        this.idProduct = idProduct;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 

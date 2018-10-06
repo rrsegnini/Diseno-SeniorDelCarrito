@@ -27,7 +27,8 @@ import cr.ac.tec.ec.seniordelcarrito.model.ProductType;
 public class MainActivity extends AppCompatActivity
         implements MainFragmentCarrito.OnFragmentInteractionListener,
         MainFragmentHome.OnFragmentInteractionListener,
-        MainFragmentUser.OnFragmentInteractionListener {
+        MainFragmentUser.OnFragmentInteractionListener,
+        MainFragmentSelection.OnFragmentInteractionListener{
 
     private TextView mTextMessage;
 
@@ -85,33 +86,34 @@ https://image.ibb.co/b5EgUK/bubulubu.jpg
 https://image.ibb.co/f8aMUK/snickers.png
 https://image.ibb.co/fzGpGz/arrollado.png
 https://image.ibb.co/f3yY9K/chiclets.jpg*/
+
     private void loadData(){
-        Inventory.addItem(new Product("Pan de canela", 600,
-                "https://image.ibb.co/bW7O9K/cinnamorolls.jpg", ProductType.PASTRY));
-        Inventory.addItem(new Product("Arrollado jamon y queso", 650,
-                "https://image.ibb.co/fzGpGz/arrollado.png", ProductType.PASTRY));
-        Inventory.addItem(new Product("Enchilada de papa", 650,
-                "https://image.ibb.co/eXsobz/enchilada.jpg", ProductType.PASTRY));
-        Inventory.addItem(new Product("Mini pizza", 800,
-                "https://image.ibb.co/hrqkOe/minipizzas.jpg", ProductType.PASTRY));
+        Inventory.addItem(new Product(1,"Pan de canela", 600,
+                "https://image.ibb.co/bW7O9K/cinnamorolls.jpg", ProductType.PASTRY,20));
+        Inventory.addItem(new Product(2,"Arrollado jamon y queso", 650,
+                "https://image.ibb.co/fzGpGz/arrollado.png", ProductType.PASTRY,10));
+        Inventory.addItem(new Product(3,"Enchilada de papa", 650,
+                "https://image.ibb.co/eXsobz/enchilada.jpg", ProductType.PASTRY,10));
+        Inventory.addItem(new Product(4,"Mini pizza", 800,
+                "https://image.ibb.co/hrqkOe/minipizzas.jpg", ProductType.PASTRY,10));
 
-        Inventory.addItem(new Product("Chiclets", 250,
-                "https://image.ibb.co/f3yY9K/chiclets.jpg", ProductType.CANDY));
-        Inventory.addItem(new Product("Gomita Trululu Feroz", 400,
-                "https://image.ibb.co/jRvKie/trululu_feroz.jpg", ProductType.CANDY));
-        Inventory.addItem(new Product("Bubulubu", 300,
-                "https://image.ibb.co/b5EgUK/bubulubu.jpg", ProductType.CANDY));
-        Inventory.addItem(new Product("Snickers", 800,
-                "https://image.ibb.co/f8aMUK/snickers.png", ProductType.CANDY));
+        Inventory.addItem(new Product(5,"Chiclets", 250,
+                "https://image.ibb.co/f3yY9K/chiclets.jpg", ProductType.CANDY,10));
+        Inventory.addItem(new Product(6,"Gomita Trululu Feroz", 400,
+                "https://image.ibb.co/jRvKie/trululu_feroz.jpg", ProductType.CANDY,10));
+        Inventory.addItem(new Product(7,"Bubulubu", 300,
+                "https://image.ibb.co/b5EgUK/bubulubu.jpg", ProductType.CANDY,10));
+        Inventory.addItem(new Product(8,"Snickers", 800,
+                "https://image.ibb.co/f8aMUK/snickers.png", ProductType.CANDY,10));
 
-        Inventory.addItem(new Product("Hi-C Uva", 600,
-                "https://image.ibb.co/gBhMwz/hic_uva.png", ProductType.BEVERAGE));
-        Inventory.addItem(new Product("Hi-C Te Frio", 650,
-                "https://image.ibb.co/iKZqpK/hic_te_frio.png", ProductType.BEVERAGE));
-        Inventory.addItem(new Product("Fresco Leche Chocolate", 650,
-                "https://image.ibb.co/mgTi9K/frescoleche.png", ProductType.BEVERAGE));
-        Inventory.addItem(new Product("Fresco Leche Vainilla", 800,
-                "https://image.ibb.co/hNOGUK/frescolechevainilla.png", ProductType.BEVERAGE));
+        Inventory.addItem(new Product(9,"Hi-C Uva", 600,
+                "https://image.ibb.co/gBhMwz/hic_uva.png", ProductType.BEVERAGE,10));
+        Inventory.addItem(new Product(10,"Hi-C Te Frio", 650,
+                "https://image.ibb.co/iKZqpK/hic_te_frio.png", ProductType.BEVERAGE,10));
+        Inventory.addItem(new Product(11,"Fresco Leche Chocolate", 650,
+                "https://image.ibb.co/mgTi9K/frescoleche.png", ProductType.BEVERAGE,10));
+        Inventory.addItem(new Product(12,"Fresco Leche Vainilla", 800,
+                "https://image.ibb.co/hNOGUK/frescolechevainilla.png", ProductType.BEVERAGE,10));
 
     }
 
