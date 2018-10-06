@@ -19,118 +19,70 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/user_lytOrders"
+            <Button
+                android:id="@+id/user_btnUser"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_weight="1"
+                android:background="@color/img_logo_background"
+                android:drawableLeft="@mipmap/baseline_person_black_48dp"
+                android:drawablePadding="@dimen/activity_horizontal_margin"
+                android:gravity="center_vertical"
+                android:padding="@dimen/activity_horizontal_margin"
+                android:text="User info"
+                android:textSize="50sp" />
 
-                <ImageView
-                    android:id="@+id/user_imgOrders"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@color/img_logo_background"
-                    android:paddingLeft="@android:dimen/app_icon_size"
-                    android:scaleType="fitCenter"
-                    android:src="@mipmap/colon" />
-
-                <Button
-                    android:id="@+id/user_btnOrders"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@color/img_logo_background"
-                    android:text="Orders"
-                    android:textSize="30sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/user_lytHelp"
+            <Button
+                android:id="@+id/user_btnOrders"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_weight="1"
+                android:background="@color/img_logo_background"
+                android:drawableLeft="@mipmap/baseline_history_black_48dp"
+                android:drawablePadding="@dimen/activity_horizontal_margin"
+                android:gravity="center_vertical"
+                android:padding="@dimen/activity_horizontal_margin"
+                android:text="Orders"
+                android:textSize="24sp" />
 
-                <ImageView
-                    android:id="@+id/user_imgOrders"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@color/img_logo_background"
-                    android:cropToPadding="false"
-                    android:paddingLeft="@android:dimen/app_icon_size"
-                    android:scaleType="centerInside"
-                    android:src="@mipmap/lifesaver" />
-
-                <Button
-                    android:id="@+id/user_btnOrders"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@color/img_logo_background"
-                    android:text="Help"
-                    android:textSize="30sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/user_lytSettings"
+            <Button
+                android:id="@+id/user_btnHelp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_weight="1"
+                android:background="@color/img_logo_background"
+                android:drawableLeft="@mipmap/baseline_help_outline_black_48dp"
+                android:drawablePadding="@dimen/activity_horizontal_margin"
+                android:gravity="center_vertical"
+                android:padding="@dimen/activity_horizontal_margin"
+                android:text="Help"
+                android:textSize="24sp" />
 
-                <ImageView
-                    android:id="@+id/user_imgOrders"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@color/img_logo_background"
-                    android:paddingLeft="@android:dimen/app_icon_size"
-                    android:scaleType="fitCenter"
-                    android:src="@mipmap/settings" />
-
-                <Button
-                    android:id="@+id/user_btnOrders"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@color/img_logo_background"
-                    android:text="Settings"
-                    android:textSize="30sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/user_lytLogout"
+            <Button
+                android:id="@+id/user_btnSettings"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_weight="1"
+                android:background="@color/img_logo_background"
+                android:drawableLeft="@mipmap/outline_settings_black_48dp"
+                android:drawablePadding="@dimen/activity_horizontal_margin"
+                android:gravity="center_vertical"
+                android:padding="@dimen/activity_horizontal_margin"
+                android:text="Settings"
+                android:textSize="24sp" />
 
-                <ImageView
-                    android:id="@+id/user_imgOrders"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@color/img_logo_background"
-                    android:paddingLeft="@android:dimen/app_icon_size"
-                    android:scaleType="fitCenter"
-                    android:src="@mipmap/logout" />
-
-                <Button
-                    android:id="@+id/user_btnOrders"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@color/img_logo_background"
-                    android:text="Log out"
-                    android:textSize="30sp" />
-
-            </LinearLayout>
+            <Button
+                android:id="@+id/user_btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/img_logo_background"
+                android:drawableLeft="@mipmap/outline_power_settings_new_black_48dp"
+                android:drawablePadding="@dimen/activity_horizontal_margin"
+                android:gravity="center_vertical"
+                android:padding="@dimen/activity_vertical_margin"
+                android:text="Logout"
+                android:textSize="24sp" />
 
         </LinearLayout>
     </ScrollView>
