@@ -1,18 +1,22 @@
 package cr.ac.tec.ec.seniordelcarrito;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -123,21 +127,49 @@ public class MainFragmentCarrito extends Fragment {
         disableAddressInput();
         setDeliverySwitch();
         List<CarritoItem> addedItems = Carrito.getAddedItems();
+
         ListView carritoList = getView().findViewById(R.id.carrito_lstOrderLines);
-        TextView line = new TextView(getContext());
+
         Product p;
         int qty = 0;
+
+        LinearLayout linearLayout = new LinearLayout(getContext());
+        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+
+
         ArrayList<String> itemsList = new ArrayList<>();
+
+        int productTotal = 0;
         for (CarritoItem c:addedItems
              ) {
             p = c.getProduct();
             qty = c.getQuantity();
-            itemsList.add(p.getName() + " " + String.valueOf(p.getQuantity()) + " " + String.valueOf(p.getPrice()*qty));
+
+            productTotal += p.getPrice()*qty;
+
+            itemsList.add(p.getName() + "          " + String.valueOf(qty)
+                    + "          " + String.valueOf(p.getPrice()*qty));
         }
         ArrayAdapter<String> arrayAdapter =
                 new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, itemsList);
         // Set The Adapter
         carritoList.setAdapter(arrayAdapter);
+
+
+        /*Setting TOTAL: label*/
+        TextView TotalTxt = getView().findViewById(R.id.carrito_txtTotal);
+        TotalTxt.setText("Total: " + productTotal);
+
+
+        /*Setting the 'Place order' button*/
+        Button placeOrder = getView().findViewById(R.id.carrito_btnPlaceOrder);
+        if (Carrito.gettNumberOfItems() == 0){
+            placeOrder.setBackgroundColor(Color.GRAY);
+            placeOrder.setEnabled(false);
+        }else{
+            placeOrder.setBackgroundColor(Color.GREEN);
+            placeOrder.setEnabled(true);
+        }
 
 
 

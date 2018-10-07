@@ -13,4 +13,7 @@ public class Carrito {
     public static List<CarritoItem> getAddedItems(){
         return items;
     }
+    public static int gettNumberOfItems(){
+        return items.size();
+    }
 }

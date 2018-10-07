@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cr.ac.tec.ec.seniordelcarrito.model.Carrito;
 import cr.ac.tec.ec.seniordelcarrito.model.CarritoBuilder;
 import cr.ac.tec.ec.seniordelcarrito.model.Product;
 
@@ -116,6 +119,7 @@ public class MainFragmentSelection extends DialogFragment {
         info.addView(np, 3);
         NameTxt.setText(Name);
 
+        int selectedQty = np.getValue();
         Button add2Carrito = getView().findViewById(R.id.main_btnAdd);
         add2Carrito.setOnClickListener(new View.OnClickListener() {
             //@SuppressLint("RestrictedApi")
@@ -123,13 +127,19 @@ public class MainFragmentSelection extends DialogFragment {
             public void onClick(View v) {
                 BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
 
-                bottomNavigationView.getMenu().findItem(R.id.navigation_carrito).setTitle("Carrito(" + String.valueOf(np.getValue()) +")");
-                bottomNavigationView.getMenu().findItem(R.id.navigation_carrito).setIcon(R.mipmap.baseline_shopping_cart_black_48dp);
-
-
+                /*Builder add the item to the carrito*/
                 carritobuilder.buildOrder(_Product, np.getValue());
 
+                /*Changes the bottom navigation icon*/
+                bottomNavigationView.getMenu().findItem(R.id.navigation_carrito).setTitle("Carrito(" + String.valueOf(Carrito.gettNumberOfItems()) +")");
+                bottomNavigationView.getMenu().findItem(R.id.navigation_carrito).setIcon(R.mipmap.baseline_shopping_cart_black_48dp);
+                bottomNavigationView.getMenu().findItem(R.id.navigation_carrito);
+
+                //Snackbar.make(getView().findViewById(R.id.navigation), "Product added!", Snackbar.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Product added!", Toast.LENGTH_SHORT).show();
                 getDialog().dismiss();
+
+
 
 
             }
