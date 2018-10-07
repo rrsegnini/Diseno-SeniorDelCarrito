@@ -1,6 +1,7 @@
 package cr.ac.tec.ec.seniordelcarrito;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,11 +9,16 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -27,6 +33,7 @@ import java.util.List;
 
 import cr.ac.tec.ec.seniordelcarrito.model.Carrito;
 import cr.ac.tec.ec.seniordelcarrito.model.CarritoItem;
+import cr.ac.tec.ec.seniordelcarrito.model.OrderBuilder;
 import cr.ac.tec.ec.seniordelcarrito.model.Product;
 
 
@@ -162,7 +169,7 @@ public class MainFragmentCarrito extends Fragment {
 
 
         /*Setting the 'Place order' button*/
-        Button placeOrder = getView().findViewById(R.id.carrito_btnPlaceOrder);
+        final Button placeOrder = getView().findViewById(R.id.carrito_btnPlaceOrder);
         if (Carrito.gettNumberOfItems() == 0){
             placeOrder.setBackgroundColor(Color.GRAY);
             placeOrder.setEnabled(false);
@@ -172,7 +179,92 @@ public class MainFragmentCarrito extends Fragment {
         }
 
 
+        /*Managing delivery info*/
+        Switch delivery = getView().findViewById(R.id.carrito_swtDelivery);
+        final TextInputEditText address = getView().findViewById(R.id.carrito_txtAddress);
+        final String deliveryAddress = address.getText().toString();
 
+
+
+
+
+
+
+        /*'Placer order' button listener*/
+        final int productTotalFinal = productTotal;
+        Button placeOrderBtn = getView().findViewById(R.id.carrito_btnPlaceOrder);
+        placeOrderBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                placeOrder(productTotalFinal)   ;
+            }
+        });
+
+
+
+    }
+
+    public void placeOrder(int total){
+        try {
+            final TextInputEditText address = getView().findViewById(R.id.carrito_txtAddress);
+            final String deliveryAddress = address.getText().toString();
+
+
+            final OrderBuilder orderBuilder = new OrderBuilder();
+            final List<CarritoItem> items = Carrito.getAddedItems();
+
+            /*Check if the order needs to be delivered*/
+            Switch delivery = getView().findViewById(R.id.carrito_swtDelivery);
+            boolean deliv;
+
+            if (delivery.isChecked()) {
+                deliv = true;
+                if (deliveryAddress.isEmpty()) {
+                    /*Do nothing because the Delivery option was selected, but no address was given*/
+                    Toast.makeText(getContext(), "Please enter an address", Toast.LENGTH_LONG).show();
+                    throw new Exception();
+                }
+            } else {
+                deliv = false;
+            }
+            final boolean isDelivery = deliv;
+
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+            String addressInfoMsg = "";
+            if (isDelivery) {
+                addressInfoMsg = " Deliver to: " + deliveryAddress;
+            }
+            builder.setMessage("Would you like to place the order? \n" + addressInfoMsg +
+                    "\n Payment amount: " + String.valueOf(total))
+                    .setTitle("Order confirmation");
+
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    orderBuilder.buildOrder(items);
+                    orderBuilder.setAddress(deliveryAddress);
+                    orderBuilder.setDelivery(isDelivery);
+
+                    Toast.makeText(getContext(), "Order placed :)\n" +
+                            "Go to User/Orders to check your orders", Toast.LENGTH_LONG).show();
+
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    // User cancelled the dialog
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }catch(Exception e){
+
+        }
+
+
+        //
     }
 
     // TODO: Rename method, update argument and hook method into UI event

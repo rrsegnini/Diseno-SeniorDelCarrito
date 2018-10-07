@@ -4,8 +4,8 @@ import java.util.List;
 
 public class CarritoBuilder implements Builder {
     @Override
-    public Carrito buildOrder(List<List<Integer>> items) {
-        //Carrito carrito = new Carrito();
+    public Carrito buildOrder(Object items) {
+        /*//Carrito carrito = new Carrito();
         for (List<Integer> list:items
                 ) {
             int productCode = list.get(0);
@@ -14,7 +14,7 @@ public class CarritoBuilder implements Builder {
             if (product!=null){
                 Carrito.add(new CarritoItem(product, productQty));
             }
-        }
+        }*/
         return null;
     }
 

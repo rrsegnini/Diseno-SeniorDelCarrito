@@ -33,7 +33,8 @@ public class MainActivity extends AppCompatActivity
         implements MainFragmentCarrito.OnFragmentInteractionListener,
         MainFragmentHome.OnFragmentInteractionListener,
         MainFragmentUser.OnFragmentInteractionListener,
-        MainFragmentSelection.OnFragmentInteractionListener{
+        MainFragmentSelection.OnFragmentInteractionListener,
+        UserFragmentOrders.OnFragmentInteractionListener{
 
     private TextView mTextMessage;
     public static Menu BottomMenu;

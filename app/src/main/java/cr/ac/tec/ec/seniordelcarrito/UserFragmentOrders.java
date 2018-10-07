@@ -3,20 +3,17 @@ package cr.ac.tec.ec.seniordelcarrito;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.app.Fragment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.Switch;
-import android.widget.Toast;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 import cr.ac.tec.ec.seniordelcarrito.model.Order;
 import cr.ac.tec.ec.seniordelcarrito.model.OrderHistory;
@@ -25,12 +22,12 @@ import cr.ac.tec.ec.seniordelcarrito.model.OrderHistory;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MainFragmentUser.OnFragmentInteractionListener} interface
+ * {@link UserFragmentOrders.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link MainFragmentUser#newInstance} factory method to
+ * Use the {@link UserFragmentOrders#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MainFragmentUser extends Fragment {
+public class UserFragmentOrders extends DialogFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -42,7 +39,7 @@ public class MainFragmentUser extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public MainFragmentUser() {
+    public UserFragmentOrders() {
         // Required empty public constructor
     }
 
@@ -52,11 +49,11 @@ public class MainFragmentUser extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MainFragmentUser.
+     * @return A new instance of fragment UserFragmentOrders.
      */
     // TODO: Rename and change types and number of parameters
-    public static MainFragmentUser newInstance(String param1, String param2) {
-        MainFragmentUser fragment = new MainFragmentUser();
+    public static UserFragmentOrders newInstance(String param1, String param2) {
+        UserFragmentOrders fragment = new UserFragmentOrders();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -71,60 +68,28 @@ public class MainFragmentUser extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
-
-
-
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main_fragment_user, container, false);
+        return inflater.inflate(R.layout.fragment_user_fragment_orders, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ListView ordersList = getView().findViewById(R.id.user_lstOrders);
+        ArrayList<String> orderLines = OrderHistory.toStringArrayList();
 
-        Button orders = getView().findViewById(R.id.user_btnOrders);
-        orders.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                displayOrderHistory();
-            }
-        });
-    }
-
-    private void displayOrderHistory(){
-
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        Fragment prev = getFragmentManager().findFragmentByTag("dialog");
-        if (prev != null) {
-            ft.remove(prev);
+        if (orderLines.isEmpty()){
+            orderLines.add("No orders yet :(");
         }
-        ft.addToBackStack(null);
-
-        UserFragmentOrders sf = new UserFragmentOrders();
-
-
-
-        /*Bundle args = new Bundle();
-        args.putInt("Price", p.getPrice());
-        args.putInt("ProductQty", p.getQuantity());
-        args.putString("Name", p.getName());
-        args.putSerializable("Product", p);*/
-
-
-        //sf.setArguments(args);
-
-
-        DialogFragment dialogFragment = sf;
-        dialogFragment.show(ft, "Orders");
+        ArrayAdapter<String> arrayAdapter =
+                new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, orderLines);
+        // Set The Adapter
+        ordersList.setAdapter(arrayAdapter);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -133,8 +98,6 @@ public class MainFragmentUser extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-
-
 
     @Override
     public void onAttach(Context context) {
@@ -167,5 +130,4 @@ public class MainFragmentUser extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
 }

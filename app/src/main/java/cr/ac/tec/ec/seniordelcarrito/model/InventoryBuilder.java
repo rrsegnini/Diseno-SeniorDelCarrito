@@ -7,7 +7,7 @@ import cr.ac.tec.ec.seniordelcarrito.model.Order;
 
 public class InventoryBuilder implements Builder {
     @Override
-    public Order buildOrder(List<List<Integer>> items) {
+    public Order buildOrder(Object items) {
         return null;
     }
 }

@@ -14,4 +14,5 @@
     <string name="Cancel">Cancel</string>
     <string name="AddCarrito">Add to carrito</string>
     <string name="PlaceOrder">Place order</string>
+    <string name="OrderHistory">Order history</string>
 </resources>

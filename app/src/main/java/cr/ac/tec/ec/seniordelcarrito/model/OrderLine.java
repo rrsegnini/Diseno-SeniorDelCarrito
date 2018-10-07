@@ -4,6 +4,8 @@ public class OrderLine {
     Product item;
     int quantity;
 
+    public OrderLine(){}
+
     public OrderLine(Product item, int quantity) {
         this.item = item;
         this.quantity = quantity;
