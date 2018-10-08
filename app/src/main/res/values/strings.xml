@@ -15,4 +15,7 @@
     <string name="AddCarrito">Add to carrito</string>
     <string name="PlaceOrder">Place order</string>
     <string name="OrderHistory">Order history</string>
+    <string name="LocationInput">Specify building, office or classroom</string>
+    <string name="RemoveItems">Remove all products</string>
+    <string name="Delete">Remove product from carrito</string>
 </resources>

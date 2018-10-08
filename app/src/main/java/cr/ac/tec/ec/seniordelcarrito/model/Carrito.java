@@ -16,4 +16,10 @@ public class Carrito {
     public static int gettNumberOfItems(){
         return items.size();
     }
+    public static void emptyCarrito(){
+        items = new ArrayList<>();
+    }
+    public static void deleteCarritoItem(CarritoItem c){
+        items.remove(c);
+    }
 }

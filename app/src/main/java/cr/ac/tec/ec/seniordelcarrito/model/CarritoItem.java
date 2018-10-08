@@ -24,4 +24,14 @@ public class CarritoItem {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    @Override
+    public String toString() {
+        Product p = this.getProduct();
+        int qty = this.getQuantity();
+
+        return (p.getName() + "          " + String.valueOf(qty)
+                    + "          " + String.valueOf(p.getPrice()*qty));
+
+    }
 }
