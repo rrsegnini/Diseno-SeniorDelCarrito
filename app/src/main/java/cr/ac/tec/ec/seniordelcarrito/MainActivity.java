@@ -29,6 +29,9 @@ import cr.ac.tec.ec.seniordelcarrito.model.Carrito;
 import cr.ac.tec.ec.seniordelcarrito.model.Inventory;
 import cr.ac.tec.ec.seniordelcarrito.model.Product;
 import cr.ac.tec.ec.seniordelcarrito.model.ProductType;
+import cr.ac.tec.ec.seniordelcarrito.model.User;
+import cr.ac.tec.ec.seniordelcarrito.model.UserAdmin;
+import cr.ac.tec.ec.seniordelcarrito.model.UserClient;
 
 public class MainActivity extends AppCompatActivity
         implements MainFragmentCarrito.OnFragmentInteractionListener,
@@ -97,6 +100,7 @@ public class MainActivity extends AppCompatActivity
 
 
         loadData();
+
     }
     /*https://image.ibb.co/eXsobz/enchilada.jpg
 https://image.ibb.co/mgTi9K/frescoleche.png

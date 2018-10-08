@@ -31,14 +31,14 @@ import cr.ac.tec.ec.seniordelcarrito.model.Product;
  * create an instance of this fragment.
  */
 public class MainFragmentSelection extends DialogFragment {
-    // TODO: Rename parameter arguments, choose names that match
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "Price";
     private static final String ARG_PARAM2 = "ProductQty";
     private static final String ARG_PARAM3 = "Name";
     private static final String ARG_PARAM4 = "Product";
 
-    // TODO: Rename and change types of parameters
+
     private int Price;
     private int Qty;
     private String Name;
