@@ -25,6 +25,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cr.ac.tec.ec.seniordelcarrito.model.Carrito;
 import cr.ac.tec.ec.seniordelcarrito.model.Inventory;
 import cr.ac.tec.ec.seniordelcarrito.model.Product;
 import cr.ac.tec.ec.seniordelcarrito.model.ProductType;
@@ -34,7 +35,8 @@ public class MainActivity extends AppCompatActivity
         MainFragmentHome.OnFragmentInteractionListener,
         MainFragmentUser.OnFragmentInteractionListener,
         MainFragmentSelection.OnFragmentInteractionListener,
-        UserFragmentOrders.OnFragmentInteractionListener{
+        UserFragmentOrders.OnFragmentInteractionListener,
+        MainFragmentEmptyCarrito.OnFragmentInteractionListener{
 
     private TextView mTextMessage;
     public static Menu BottomMenu;
@@ -61,8 +63,13 @@ public class MainActivity extends AppCompatActivity
                     fragmentChanger(fm, fragment);  //Changes the fragment
                     return true;
                 case R.id.navigation_carrito:
-                    fragment = new MainFragmentCarrito();
-                    fragmentChanger(fm, fragment);
+                    if (Carrito.gettNumberOfItems() > 0){
+                        fragment = new MainFragmentCarrito();
+                        fragmentChanger(fm, fragment);
+                    }else{
+                        fragment = new MainFragmentEmptyCarrito();
+                        fragmentChanger(fm, fragment);
+                    }
                     return true;
                 case R.id.navigation_user:
                     fragment = new MainFragmentUser();

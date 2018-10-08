@@ -140,22 +140,32 @@ public class MainFragmentCarrito extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
         disableAddressInput();
         setDeliverySwitch();
-
-        LinearLayout linearLayout = new LinearLayout(getContext());
-        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-
-
+        updateButtons();
         int productTotal = populateCarritoList();
+        setButtonListeners(productTotal);
+        setTotalLabel(productTotal);
+    }
 
-        /*Setting TOTAL: label*/
+    /*Setting TOTAL: label*/
+    private void setTotalLabel(int productTotal){
+
         TextView TotalTxt = getView().findViewById(R.id.carrito_txtTotal);
         TotalTxt.setText("Total: " + productTotal);
+    }
 
+    private void updateTotalLabel(int total, int productToSubtract){
 
+        TextView TotalTxt = getView().findViewById(R.id.carrito_txtTotal);
+        total = total - productToSubtract;
+        TotalTxt.setText("Total: " + total);
+    }
+
+    /*Disables and enables buttons, depending on the amount of items the carrito has*/
+    private void updateButtons(){
         /*Setting the 'Place order' button*/
         final Button placeOrder = getView().findViewById(R.id.carrito_btnPlaceOrder);
         final Button removeAll = getView().findViewById(R.id.carrito_btnEmptyCarrito);
-        if (Carrito.gettNumberOfItems() == 0){
+        if (Carrito.gettNumberOfItems() <= 0){
             placeOrder.setBackgroundColor(Color.GRAY);
             placeOrder.setEnabled(false);
             removeAll.setBackgroundColor(Color.GRAY);
@@ -167,29 +177,18 @@ public class MainFragmentCarrito extends Fragment {
             removeAll.setEnabled(true);
         }
 
+    }
 
-        /*Managing delivery info*/
-        Switch delivery = getView().findViewById(R.id.carrito_swtDelivery);
-        final TextInputEditText address = getView().findViewById(R.id.carrito_txtAddress);
-        final String deliveryAddress = address.getText().toString();
-
-
-
-
-
-
-
-        /*Setting button listeners*/
+    /*Setting button listeners*/
+    private void setButtonListeners(int productTotal){
+        final BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
         final int productTotalFinal = productTotal;
         Button placeOrderBtn = getView().findViewById(R.id.carrito_btnPlaceOrder);
         placeOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 placeOrder(productTotalFinal);
-                Carrito.emptyCarrito();
-                populateCarritoList();
-                BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
-                bottomNavigationView.getMenu().findItem(R.id.navigation_carrito).setTitle("Carrito");
+
             }
         });
         Button removeAllBtn = getView().findViewById(R.id.carrito_btnEmptyCarrito);
@@ -202,6 +201,9 @@ public class MainFragmentCarrito extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
                         Carrito.emptyCarrito();
                         populateCarritoList();
+                        updateButtons();
+                        bottomNavigationView.getMenu().findItem(R.id.navigation_carrito).setTitle("Carrito");
+                        setTotalLabel(0);
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -214,7 +216,6 @@ public class MainFragmentCarrito extends Fragment {
 
             }
         });
-
 
     }
 
@@ -240,6 +241,7 @@ public class MainFragmentCarrito extends Fragment {
         // Set The Adapter
         carritoList.setAdapter(arrayAdapter);
 
+        final int finalProductTotal = productTotal;
         carritoList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -257,8 +259,11 @@ public class MainFragmentCarrito extends Fragment {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.item_navigation_delete:
+                                int totalDeletedPrice = item_carrito.getProduct().getPrice()*item_carrito.getQuantity();
+                                updateTotalLabel(finalProductTotal, totalDeletedPrice);
                                 Carrito.deleteCarritoItem(item_carrito);
                                 populateCarritoList();
+                                updateButtons();
                                 return true;
 
                         }
@@ -274,20 +279,19 @@ public class MainFragmentCarrito extends Fragment {
     }
 
 
-
+    /*Takes all the info and saves the order*/
     public void placeOrder(int total){
         try {
+            final BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
             final TextInputEditText address = getView().findViewById(R.id.carrito_txtAddress);
             final String deliveryAddress = address.getText().toString();
-
-
             final OrderBuilder orderBuilder = new OrderBuilder();
             final List<CarritoItem> items = Carrito.getAddedItems();
+
 
             /*Check if the order needs to be delivered*/
             Switch delivery = getView().findViewById(R.id.carrito_swtDelivery);
             boolean deliv;
-
             if (delivery.isChecked()) {
                 deliv = true;
                 if (deliveryAddress.isEmpty()) {
@@ -302,7 +306,6 @@ public class MainFragmentCarrito extends Fragment {
 
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
             String addressInfoMsg = "";
             if (isDelivery) {
                 addressInfoMsg = " Deliver to: " + deliveryAddress;
@@ -316,8 +319,10 @@ public class MainFragmentCarrito extends Fragment {
                     orderBuilder.buildOrder(items);
                     orderBuilder.setAddress(deliveryAddress);
                     orderBuilder.setDelivery(isDelivery);
-
-
+                    setTotalLabel(0);
+                    Carrito.emptyCarrito();
+                    populateCarritoList();
+                    bottomNavigationView.getMenu().findItem(R.id.navigation_carrito).setTitle("Carrito");
 
                     AlertDialog.Builder builderSuccess = new AlertDialog.Builder(getActivity());
 
